@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alejandro Martinez Jr. Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLoginModal()">&times;</span>
+            <h2>Login</h2>
+            <div class="login-options">
+                <button onclick="setLoginMode('admin')">Admin</button>
+                <button onclick="setLoginMode('guest')">Guest</button>
+            </div>
+            <div id="login-form" style="display: none;">
+                <label for="username">Username:</label>
+                <input type="text" id="username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" required>
+                <button onclick="login()">Login</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logout Message Modal -->
+    <div id="logout-message" class="modal">
+        <div class="modal-content">
+            <p>Thanks for visiting my website.</p>
+            <p id="shuffle-quote"></p>
+            <button onclick="returnToLogin()">Return to Login</button>
+        </div>
+    </div>
+
+    <!-- Vault Security Modal -->
+    <div id="vault-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeVaultModal()">&times;</span>
+            <p>Enter password to download:</p>
+            <input type="password" id="vault-password" placeholder="Enter password">
+            <button onclick="checkVaultPassword()">Submit</button>
+            <button onclick="emailForPermission()">Email me for permission</button>
+        </div>
+    </div>
+
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="logo.png" alt="Logo" class="logo-img">
+                Alejandro Martinez Jr.
+            </div>
+            <ul>
+                <li><a href="#about" onclick="openSection('about')">About</a></li>
+                <li><a href="#skills" onclick="openSection('skills')">Skills</a></li>
+                <li><a href="#achievements" onclick="openSection('achievements')">Achievements</a></li>
+                <li><a href="#projects" onclick="openSection('projects')">Projects</a></li>
+                <li><a href="#contact" onclick="openSection('contact')">Contact</a></li>
+                <li><button id="login-btn" onclick="openLoginModal()">Login</button></li>
+                <li><button id="logout-btn" style="display: none;" onclick="triggerLogout()">Logout</button></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section id="home" class="hero">
+        <div class="content">
+            <div class="image">
+                <img src="homelogo.png" alt="Home Image" class="home-img">
+            </div>
+            <h1>Hi, I'm <span class="neon-text">Alejandro M. Martinez Jr.</span></h1>
+            <h2>IT Student</h2>
+            <p>With a passion for technology and problem-solving, I am focused on contributing to innovative projects and advancing my career in the tech industry.</p>
+            <div class="socials">
+                <div class="facebook-link">
+                    <i class="fab fa-facebook"></i>
+                    <a href="https://www.facebook.com/alejandro.martinez050302" target="_blank" class="facebook-text">CLICK HERE TO VISIT MY OFFICIAL FACEBOOK PROFILE</a>
+                </div>
+            </div>
+            <div class="buttons">
+                <a href="resume.pdf" download><button><i class="fas fa-download"></i> Download Resume</button></a>
+                <button onclick="callMe()"><i class="fas fa-phone"></i> Call Me</button>
+                <button onclick="buyMeCoffee()"><i class="fas fa-coffee"></i> Buy Me a Coffee</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="dynamic-content">
+        <div id="about" class="info-section">
+            <h2>About</h2>
+            <p>I am Alejandro M. Martinez Jr., a dedicated IT Student with a strong foundation in computer technology and problem-solving skills. I thrive in dynamic environments and am eager to apply my knowledge in real-world projects. My goal is to secure a challenging role in the tech industry where I can contribute to innovative solutions and advance my career.</p>
+        </div>
+        <div id="skills" class="info-section">
+            <h2>Skills</h2>
+            <ul>
+                <li>Photo & Video Editing: Skilled in enhancing visual content with precision and creativity.</li>
+                <li>Videography: Capturing compelling narratives through the lens.</li>
+                <li>Programming Languages: Proficient in Arduino, C++, and Java.</li>
+                <li>Technical Proficiency: Knows how to use Word and Excel.</li>
+                <li>Critical Thinking & Analytical Skills: Strong ability to analyze situations and propose effective solutions.</li>
+                <li>Problem Solving: Adept at identifying issues and implementing efficient solutions.</li>
+            </ul>
+        </div>
+        <div id="achievements" class="info-section">
+            <h2>Achievements</h2>
+            <ul>
+                <li>Consistent Dean’s Lister: A testament to my dedication and academic excellence.</li>
+                <li>Escape Room Champion: Proved my strategic thinking and teamwork during Techno Week events in 2024.</li>
+            </ul>
+        </div>
+        <div id="projects" class="info-section">
+            <h2>Projects</h2>
+            <p>Coming Soon...</p>
+        </div>
+        <div id="contact" class="info-section">
+            <h2>Contact</h2>
+            <form onsubmit="handleSubmit(event)" class="contact-form">
+                <input type="text" name="name" placeholder="Your Full Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" required></textarea>
+                <button type="submit"><i class="fas fa-paper-plane"></i> Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- OJT Work Cycle Section -->
+    <section id="ojt-work-cycle">
+        <h2 class="neon-box">OJT - EMD ADMIN TECH WORK CYCLE</h2>
+        <p class="instruction-label">SELECT A FILE YOU WANT TO DOWNLOAD</p>
+        <div class="work-cycle">
+            <div class="division neon-border" id="needs-to-print">
+                <h3>NEEDS TO PRINT</h3>
+                <button onclick="onFileDownloadAttempt('DTR WEEKLY.docx')">DTR Weekly</button>
+                <button onclick="onFileDownloadAttempt('EMPLOYEE GATEPASS.pdf')">Employee Gatepass</button>
+                <button onclick="onFileDownloadAttempt('OTR EXCEL FILE.xlsx')">OTR Excel File</button>
+                <button onclick="onFileDownloadAttempt('OTR WORD FILE.doc')">OTR Word File</button>
+                <button onclick="onFileDownloadAttempt('SPECIAL ORDER REQUEST.pdf')">Special Order Request</button>
+                <button onclick="onFileDownloadAttempt('STAFF DTR.pdf')">Staff DTR</button>
+                <button onclick="onFileDownloadAttempt('STAFF OTR.pdf')">Staff OTR</button>
+            </div>
+            <div class="division neon-border" id="needs-to-encode">
+                <h3>NEEDS TO ENCODE</h3>
+                <button onclick="onFileDownloadAttempt('DIESEL MONITORING TEMPLATE.xlsx')">Diesel Monitoring Template</button>
+                <button onclick="onFileDownloadAttempt('PURCHASING CENTRAL WAREHOUSE CRUDE MONITORING.xlsx')">Purchasing Central Warehouse Crude Monitoring</button>
+                <button onclick="onFileDownloadAttempt('FUEL REQUISITION SLIP.docx')">Fuel Requisition Slip</button>
+                <button onclick="onFileDownloadAttempt('DIESEL CONSUMPTION.xlsx')">Diesel Consumption (Status Supervisor in Charge)</button>
+            </div>
+            <div class="division neon-border" id="important-files">
+                <h3>IMPORTANT FILES</h3>
+                <button onclick="onFileDownloadAttempt('INCIDENT REPORT.docx')">Incident Report</button>
+                <button onclick="onFileDownloadAttempt('JOB WORK ORDER FORM.xlsx')">Job Work Order Form</button>
+                <button onclick="onFileDownloadAttempt('EMPLOYMENT APPLICATION UPDATE.docx')">Employment Application Update</button>
+                <button onclick="onFileDownloadAttempt('EMPLOYEE DAILY TIME RECORD LOGBOOK.xlsx')">Employee Daily Time Record Logbook</button>
+                <button onclick="onFileDownloadAttempt('AUTHORIZATION COMPANY LETTER.docx')">Authorization Company Letter</button>
+                <button onclick="onFileDownloadAttempt('AUTHORIZATION LETTER ORIGINAL.docx')">Authorization Letter Original</button>
+                <button onclick="onFileDownloadAttempt('BASIC INFO FOR TESDA APPLICATION.pdf')">Basic Info for TESDA Application</button>
+            </div>
+            <div class="division neon-border" id="needs-to-take-picture">
+                <h3>NEEDS TO TAKE A PICTURE</h3>
+                <p>Diesel picture prices of Kapitan. Submit report to "Diesel" group chat in Facebook.</p>
+                <img src="diesel-price-example.png" alt="Diesel Kapitan Price Example" class="small-zoomable-img">
+            </div>
+        </div>
+        <div class="banner neon-border">
+            <p id="quote-display" class="glowing-text">The only way to do great work is to love what you do. – Steve Jobs</p>
+            <p><strong style="color: white;">CAUTION: If you have 4 or 2 booklets left, get Fuel Requisition Slip booklet at Dumanjug QM Main Office in charge Maam Madi! Thank you.</strong></p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Alejandro M. Martinez Jr.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
